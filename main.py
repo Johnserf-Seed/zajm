@@ -8,7 +8,7 @@ import time,os,sqlite3
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
-DATABASE = 'H:/Python/API-Flask/excel/last.sqlite'
+DATABASE = 'last.sqlite'
 
 app = Flask(__name__, instance_relative_config=True)    #工厂模式
 
