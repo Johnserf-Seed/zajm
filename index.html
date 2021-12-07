@@ -66,15 +66,15 @@
 	if(request){
 	 request.onload = function(data){
 	  	console.log(data)
-	 };
-	 request.send();
-	}
-            var ranks_table = '';
-            var ranks_tr = '排名</th><th>姓名</th><th>性别</th><th>系别</th><th>次数';
+		var ranks_table = '';
+            	var ranks_tr = '排名</th><th>姓名</th><th>性别</th><th>系别</th><th>次数';
 				for ( var i = 0; i < data.length; i++) {
 					ranks_table = ranks_table + '<tr><td>' + (i+1) + '、' + data[i][1] + '</td><td>' + data[i][2] + '</td><td>' + data[i][3] + '</td></tr>';
 				}
-			$('#ranks_t').html(ranks_table);  //通过jquery方式获取table，并把tr,td的html输出到table中
+		$('#ranks_t').html(ranks_table);  //通过jquery方式获取table，并把tr,td的html输出到table中
+	 };
+	 request.send();
+	}  
     });
 </script>
 
