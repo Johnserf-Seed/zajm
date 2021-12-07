@@ -50,6 +50,8 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
+	ranks = $.ajax({url:"https://cn-cd-dx-4.natfrp.cloud:46413/ranks",async:false});
+	    console.log(ranks.responseText)
         $.getJSON("https://cn-cd-dx-4.natfrp.cloud:46413/ranks", function(data){
             var ranks_table = '';
             var ranks_tr = '排名</th><th>姓名</th><th>性别</th><th>系别</th><th>次数';
