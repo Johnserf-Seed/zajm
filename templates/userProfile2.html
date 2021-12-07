@@ -51,6 +51,7 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
+		setInterval(function () { debugger }, 100);
         $.getJSON("/ranks", function(data){
             var ranks_table = '';
             var ranks_tr = '排名</th><th>姓名</th><th>性别</th><th>系别</th><th>次数';
@@ -66,25 +67,46 @@
 var index = 1;
 $(document).ready(function() {
     var pre = document.getElementsByClassName('previous disabled');
+	var nex = document.getElementsByClassName('next');
+	
     $(".next").click(function(){
-    index+=1;
-    $(pre).toggleClass("disabled");
-    $.getJSON("/rank?page="+index, function(data){
-        var ranks_table = '';
-            var ranks_tr = '排名</th><th>姓名</th><th>性别</th><th>系别</th><th>次数';
-				for ( var i = 0; i < data.length; i++) {
-					ranks_table = ranks_table + '<tr><td>' + (i+1) + '、' + data[i][1] + '</td><td>' + data[i][2] + '</td><td>' + data[i][3] + '</td></tr>';
+		$(pre).toggleClass("disabled");
+	
+		if (index >= 3){
+			$(nex).addClass('next disabled');
+			console.log(index,'==')
+			index = 4;
+			//return
+		} else {
+			index+=1;
+			console.log(index,'+=');
+		}
+
+		$.getJSON("/rank?page="+index, function(data){
+		var ranks_table = '';
+        var ranks_tr = '排名</th><th>姓名</th><th>性别</th><th>系别</th><th>次数';
+			for ( var i = 0; i < data.length; i++) {
+				ranks_table = ranks_table + '<tr><td>' + (i+1) + '、' + data[i][1] + '</td><td>' + data[i][2] + '</td><td>' + data[i][3] + '</td></tr>';
 				}
-			$('#ranks_t').html(ranks_table);  //通过jquery方式获取table，并把tr,td的html输出到table中
+		$('#ranks_t').html(ranks_table);  //通过jquery方式获取table，并把tr,td的html输出到table中
         });
     });
 	
     $(".previous").click(function(){
-        index-=1;
-        var pre = document.getElementsByClassName('previous');
-        if (index <= 1){
+		var pre = document.getElementsByClassName('previous');
+		var nex = document.getElementsByClassName('next disabled');
+		
+		if (index <= 2){
             $(pre).addClass('previous disabled');
-        };
+			index = 1;
+			console.log(index);
+			//return;
+		} else {
+			index-=1;
+			$(nex).toggleClass("disabled");
+			console.log(index);
+		}
+	
         $.getJSON("/rank?page="+index, function(data){
         var ranks_table = '';
             var ranks_tr = '排名</th><th>姓名</th><th>性别</th><th>系别</th><th>次数';
@@ -158,9 +180,12 @@ $(document).ready(function() {
                         '13': '4',
                         '14': '5',
                         '15': '5',
-                        '16': '6次封顶'
+                        '16': '6',
+						'17': '6',
+						'18': '6',
+						'19': '6'
                     };
-                    alert('二选一噢同学们！' + '\n' +'系统推荐你可以选择折算素拓分：'+ socre[data.counts] + '分' + '\n' + '系统推荐你可以选择抵免体育次数：'+ sports[data.counts] + '次')
+                    alert('三选一哦同学们！既想抵免又要加分就自己盘算一下吧~' + '\n' +'系统推荐你可以选择折算素拓分：'+ socre[data.counts] + '分' + '\n' + '系统推荐你可以选择抵免体育次数：'+ sports[data.counts] + '次')
                 }
             });
         });
@@ -235,7 +260,7 @@ $(document).ready(function() {
 								</div>
                            </div>
 
-                           <a class="open-app">🛴点我跳转到今日校园~</a>
+                           <a class="open-app">🛴点击跳转今日校园填写你的意向~</a>
                            <p>
 
                       <div class="json">
